@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './SearchBox.module.css';
 
-const api = 'http://www.omdbapi.com/?';
+const api = 'https://www.omdbapi.com/?';
 
 export default function SearchBox(props) {
   const [ text, setText ] = useState('');
