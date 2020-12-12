@@ -1,31 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
+import Movie from './components/Movie';
+import ResultSet from './components/ResultSet';
 import SearchBox from './components/SearchBox';
-
-const Movie = function(props) {
-  const { Title, Year, imdbID, Poster, Type } = props.info;
-
-  return (
-    <article>
-      <h3>{Title}</h3>
-      <h6>{`${Type} ${Year} IMDB: ${imdbID}`}</h6>
-      <img alt={`${Movie}'s poster`} src={Poster} />
-    </article>
-  );
-}
-
-const ResultSet = function(props) {
-  const { Search, Response } = props.items;
-
-  return (
-    Response === 'True' ?
-    Search.map(info => {
-      return <Movie info={info} />
-    })
-    :
-    <h3>No movies :'(</h3>
-  );
-}
 
 function App() {
   const [movie, setMovie] = useState();
@@ -40,7 +17,16 @@ function App() {
         <SearchBox handleResult={handleResult} />
       </header>
       <main className="container">
-        {movie ? <ResultSet items={movie} /> : null}
+        {movie
+          ?
+            parseInt(movie.totalResults) > 1
+            ?
+              <ResultSet items={movie} />
+            : parseInt(movie.totalResults) == 1 ?
+              <Movie info={movie.Search[0]} /> : null
+          :
+          null
+        }
       </main>
     </div>
   );

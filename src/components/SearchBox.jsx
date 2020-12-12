@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from './SearchBox.module.css';
 
 const api = 'http://www.omdbapi.com/?';
 
@@ -39,21 +40,22 @@ export default function SearchBox(props) {
   }
 
   return (
-    <div>
-      <div>
-        <label for="apikey">OMDB API Key</label>
+    <React.Fragment>
+      <div className={`${styles.item} align-start`}>
+        <label htmlFor="apikey">OMDB API Key</label>
         <input type="text" name="apikey" value={apiKey}
           onChange={handleForm}
         />
       </div>
-      <div>
+      <div className={`${styles.item} align-stretch`}>
         <input type="text" name="text" value={text}
           onChange={handleForm}
+          className="w100"
         />
       </div>
-      <div>
+      <div className={styles.item}>
         <button value='Search' name="search" onClick={handleForm}>Search</button>
       </div>
-    </div>
+    </React.Fragment>
   );
 }
